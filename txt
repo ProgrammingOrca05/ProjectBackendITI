@@ -1,24 +1,24 @@
 Main pages:
 /home | / (front)
 
-/appointments (Backend) (A)
+/appointments (Backend) (O)
 
 /aboutus (front)
 
 
 /contactus-clinic (optional) (front)
 
-/sign-up (back) (A)
+/sign-up (back) (A,O)
 
-/login (back) (O)
+/login (back) (A,O)
 
 /doctor-calender (back) (A)
 
-/about-{doctor.username} (back) (O)
+/about-{doctor.username} (back) (A)
 
 /make-appointment (back) (O)
 
-/Doctors (back) (O)
+/Doctors (back) (A)
 
 /{patient.username}-appointment (back) (A)
 
