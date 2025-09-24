@@ -1,0 +1,26 @@
+Main pages:
+/home | / (front)
+
+/appointments (Backend) (A)
+
+/aboutus (front)
+
+
+/contactus-clinic (optional) (front)
+
+/sign-up (back) (A)
+
+/login (back) (O)
+
+/doctor-calender (back) (A)
+
+/about-{doctor.username} (back) (O)
+
+/make-appointment (back) (O)
+
+/Doctors (back) (O)
+
+/{patient.username}-appointment (back) (A)
+
+
++PROFILE sidebar
