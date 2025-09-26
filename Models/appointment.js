@@ -20,7 +20,8 @@ const appointmentSchema = new mongoose.Schema({
   },
   notes: {
     type: String,
-  }
+  },
+  phone:{ type:String,required:true }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Appointment', appointmentSchema);

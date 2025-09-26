@@ -15,4 +15,4 @@ const patientSchema = new mongo.Schema({
 }, { timestamps: true });
 
 
-module.exports = [patientSchema];
+module.exports =mongo.model('Patient', patientSchema);
