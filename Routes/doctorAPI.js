@@ -3,16 +3,16 @@ const router=exp.Router();
 const doctorController=require('../controllers/docterController');
 
 //Create Doctor إنشاء دكتور
-router.post('/api/createDoctor',doctorController.createDoctor);
+router.post('/api/doctors',doctorController.createDoctor);
 
 
 //get doctor details الحصول على تفاصيل الدكتور
-router.get('/api/findDoctor/:id',doctorController.getDoctorDetails);
+router.get('/api/doctors/:id',doctorController.getDoctorDetails);
 
 //get all doctors الحصول على جميع الأطباء
-router.get("/api/alldoctors",doctorController.getAllDoctors);
+router.get("/api/doctors",doctorController.getAllDoctors);
 //تحديث تفاصيل الدكتور 
-router.put("/api/updateDoctor/:id",doctorController.updateDoctorDetails);
+router.patch("/api/doctors/:id",doctorController.updateDoctorDetails);
 
 
 
