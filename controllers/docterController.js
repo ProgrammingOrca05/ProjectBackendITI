@@ -84,7 +84,7 @@ const getDoctorDetails=async(req,res)=>
 const getAllDoctors=async(req,res)=>
 {
     try{
-        const doctors=await doctorModel.find().select("name specialization about workHrs email");//بجيب جميع الأطباء مع تحديد الحقول المطلوبة فقط   
+        const doctors=await doctorModel.find().select("");//بجيب جميع الأطباء مع تحديد الحقول المطلوبة فقط   
         if(doctors.length===0)
         {
             res.status(404).json({
@@ -111,9 +111,31 @@ const getAllDoctors=async(req,res)=>
 }
 
 
+//update doctor details تحديث تفاصيل الدكتور
+const updateDoctorDetails=async(req,res)=>{
+
+    try{
+        const doctorId=req.params.id;//نجيب ال id من ال url
+        const updatedDoctor=await doctorModel.findByIdAndUpdate(doctorId,req.body,{new:true,runValidators:true}).select("name specialization about workHrs email");//بجيب الدكتور بال id وبحدثه
+        res.status(200).json({
+            message:"Doctor updated successfully",
+            status:"success",
+            data:updatedDoctor
+        })//تم تحديث الدكتور بنجاح  
+
+    }catch(err){
+        res.status(500).json({
+            message:err.message,
+            status:"fail",
+            data:null
+        });//خطأ في الخادم الداخلي  
+
+    }   
+}
 
 
 
 
 
-module.exports={createDoctor,getDoctorDetails,getAllDoctors};//استيراد الفانكشنز في ملفات أخرى
+
+module.exports={createDoctor,getDoctorDetails,getAllDoctors,updateDoctorDetails};//استيراد الفانكشنز في ملفات أخرى

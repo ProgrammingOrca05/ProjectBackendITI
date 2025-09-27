@@ -11,5 +11,10 @@ router.get('/api/findDoctor/:id',doctorController.getDoctorDetails);
 
 //get all doctors الحصول على جميع الأطباء
 router.get("/api/alldoctors",doctorController.getAllDoctors);
+//تحديث تفاصيل الدكتور 
+router.put("/api/updateDoctor/:id",doctorController.updateDoctorDetails);
+
+
+
 
 module.exports=router;//router export
