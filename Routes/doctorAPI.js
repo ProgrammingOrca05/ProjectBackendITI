@@ -1,10 +1,17 @@
 const exp=require('express');
 const router=exp.Router();
 const doctorController=require('../controllers/docterController');
+const signUpLoginController=require('../controllers/signUpLogin');
+const authenticate=require("../middleware/authorMiddlware");
 
-//Create Doctor إنشاء دكتور
-router.post('/api/doctors',doctorController.createDoctor);
+//sign up doctor تسجيل دكتور
+router.post('/api/doctors/signup',signUpLoginController.createDoctor);
 
+//تسجيل دخول دكتور 
+router.post("/api/doctors/login",signUpLoginController.loginDoctor);
+
+//control pannel/profile for doctor لوحة تحكم الدكتور
+router.get("/api/doctors/me",authenticate,doctorController.controlPannel);
 
 //get doctor details الحصول على تفاصيل الدكتور
 router.get('/api/doctors/:id',doctorController.getDoctorDetails);
@@ -12,7 +19,8 @@ router.get('/api/doctors/:id',doctorController.getDoctorDetails);
 //get all doctors الحصول على جميع الأطباء
 router.get("/api/doctors",doctorController.getAllDoctors);
 //تحديث تفاصيل الدكتور 
-router.patch("/api/doctors/:id",doctorController.updateDoctorDetails);
+router.patch("/api/doctors/me",authenticate,doctorController.updateDoctorDetails);
+
 
 
 
