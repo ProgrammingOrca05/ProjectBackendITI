@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const appointmentSchema = new mongoose.Schema({
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
@@ -13,6 +15,11 @@ const appointmentSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+   time:{
+    type:String,
+    required:true,
+    match: /^([01]\d|2[0-3]):([0-5]\d)$/
+   },
   status: {
     type: String,
     enum: ['Scheduled', 'Completed', 'Cancelled'],

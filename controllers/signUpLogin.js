@@ -107,7 +107,6 @@ const createPatient = async (req, res) => {
             message: "Patient created successfully",
             status: "success",
             data: {
-                password:patient.password, //for testing only للاختبار فقط 
                 name: patient.name,
                 email: patient.email,
                 age: patient.age,

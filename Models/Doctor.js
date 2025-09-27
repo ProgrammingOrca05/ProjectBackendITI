@@ -15,6 +15,7 @@ doctorSchema.pre("save",async function(){
     const salt=await bcrypt.genSalt(12); //انشاء ال salt
     this.password=await bcrypt.hash(this.password,salt); //تشفير كلمة المرور مع ال salt
     return;
+    
 })
 
 //comapre password مقارنة كلمة المرور
