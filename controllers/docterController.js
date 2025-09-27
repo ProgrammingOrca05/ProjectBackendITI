@@ -118,7 +118,26 @@ const controlPannel=async(req,res)=>{
     }
 }
 
+//delete doctor حذف دكتور   
+const deleteDoctor=async(req,res)=>{
+    try{
+        const doctor=await doctorModel.findById(req.user.id);
+        if(!doctor)
+        {
+            return res.status(404).json({message:"Doctor not found",status:"fail",data:null});//الدكتور غير موجود   
+        }
+        await doctorModel.findByIdAndDelete(req.user.id);
+        return res.status(200).json({message:"Doctor deleted successfully",status:"success",data:null});//تم حذف الدكتور بنجاح  
+    }catch(err){
+        return res.status(500).json({
+            message:err.message,
+            status:"fail",
+            data:null
+        });//خطأ في الخادم الداخلي
+
+    }
+}
 
 
 
-module.exports={getDoctorDetails,getAllDoctors,updateDoctorDetails,controlPannel};//استيراد الفانكشنز في ملفات أخرى
+module.exports={getDoctorDetails,getAllDoctors,updateDoctorDetails,controlPannel,deleteDoctor};//استيراد الفانكشنز في ملفات أخرى

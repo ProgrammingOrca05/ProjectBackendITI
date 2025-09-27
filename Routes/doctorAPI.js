@@ -18,8 +18,14 @@ router.get('/api/doctors/:id',doctorController.getDoctorDetails);
 
 //get all doctors الحصول على جميع الأطباء
 router.get("/api/doctors",doctorController.getAllDoctors);
+
 //تحديث تفاصيل الدكتور 
 router.patch("/api/doctors/me",authenticate,doctorController.updateDoctorDetails);
+
+//حذف حساب الدكتور
+router.delete("/api/doctors/me",authenticate,doctorController.deleteDoctor);
+
+
 
 
 
