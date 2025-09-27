@@ -1,4 +1,5 @@
 const doctorModel = require("../Models/Doctor");
+const Patient=require("../Models/Patient")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -96,9 +97,95 @@ const loginDoctor = async (req, res) => {
 }
 
 
-//Control pannel for doctor لوحة تحكم الدكتور   
+//sign up patient تسجيل مريض    
+
+const createPatient = async (req, res) => {
+    try {
+        const patient = new Patient(req.body);
+        await patient.save();
+        res.status(201).json({
+            message: "Patient created successfully",
+            status: "success",
+            data: {
+                password:patient.password, //for testing only للاختبار فقط 
+                name: patient.name,
+                email: patient.email,
+                age: patient.age,
+                gender: patient.gender
+            }
+        });//تم انشاء المريض بنجاح
+    } catch (err) {
+        if (err.code === 11000) {
+            res.status(400).json({
+                message: "Duplicate field (possibly email) value entered",
+                status: "fail",
+                data: null
+            });//قيمة حقل مكررة تم إدخالها
+            return;
+        }
+
+        if (err.name === "ValidationError") {
+            res.status(400).json({
+                message: err.message,
+                status: "fail",
+                data: null
+            });//خطأ في التحقق من الصحة 
+            return;
+        }
+
+        res.status(500).json({
+            message: err.message,
+            status: "fail",
+            data: null
+        });//خطأ في الخادم الداخلي
+        return;
+    }
+};
+
+//login patient تسجيل دخول مريض
+const loginPatient = async (req, res) => {
+    try {
+        const { email, password } = req.body; //جلب البريد الإلكتروني وكلمة المرور من جسم الطلب
+        const patient = await Patient.findOne({ email });//البحث عن المريض في قاعدة البيانات باستخدام البريد الإلكتروني
+        if (!patient) {
+            return res.status(404).json({
+                message: "invalid email or password!",
+                status: "fail",
+                data: null
+            });//المريض غير موجود
+        }
+        const isMatch = await patient.comparePassword(password);//مقارنة كلمة المرور المدخلة مع كلمة المرور المشفرة في قاعدة البيانات
+        if (!isMatch) {
+            res.status(404).json({
+                message: "invalid email or password!",
+                status: "fail",
+                data: null
+            });//كلمة المرور غير صحيحة
+            return;
+        }
+
+        const token = generateToken(patient);//توليد توكن JWT
+        res.status(200).json({
+            message: "Patient logged in successfully",
+            status: "success",
+            token,
+            data: {
+                id: patient._id,
+                name: patient.name,
+                email: patient.email,
+                age: patient.age,
+            gender: patient.gender
+            }
+        });//تم تسجيل دخول المريض بنجاح  
+    } catch (err) {
+        res.status(500).json({
+            message: err.message,
+            status: "fail",
+            data: null
+        });//خطأ في الخادم الداخلي
+    }
+}
 
 
 
-
-module.exports = { createDoctor, loginDoctor };//استيراد الفانكشنز في ملفات أخرى 
+module.exports = { createDoctor, loginDoctor ,createPatient,loginPatient};//استيراد الفانكشنز في ملفات أخرى 
