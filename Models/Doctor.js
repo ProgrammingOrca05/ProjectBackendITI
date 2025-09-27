@@ -12,4 +12,4 @@ const doctorSchema=new mongo.Schema({
 
 
 
-module.exports=[doctorSchema];
+module.exports=mongo.model("Doctor",doctorSchema);
