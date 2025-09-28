@@ -48,7 +48,7 @@ const getAllAppointments = async (req, res) => {
         const userId = req.user.id;//جلب id المريض او الطبيب من التوكن
         const appointments = await appointment.find({ $or: [ { patient: userId }, { doctor: userId } ] })
             .populate('doctor', 'name specialization email') // populate doctor details
-            .populate('patient', 'name email'); // populate patient details
+            .populate('patient', 'name email '); // populate patient details
         if(appointments.length===0)
         {
             return res.status(404).json({
@@ -77,7 +77,7 @@ const getAppointmentById = async (req, res) => {
     try{
         const { id } = req.params;
         const wantedAppoinment=await appointment.findById(id)
-        .populate('doctor', 'name specialization email') // populate doctor details
+        .populate('doctor', 'name specialization email examinationPrice') // populate doctor details
         .populate('patient', 'name email gender phone'); // populate patient details
         if(!wantedAppoinment)
         {

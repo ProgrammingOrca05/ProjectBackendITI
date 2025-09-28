@@ -8,7 +8,8 @@ const doctorSchema=new mongo.Schema({
     password:{type:String,required:true,minlength:8},
     specialization:{type:String,required:true},
     about:{type:String,required:true},
-    workHrs:{type:String,enum:['8am-12pm','12pm-4pm','4pm-8pm'],default:'12pm-4pm',required:true}
+    workHrs:{type:String,enum:['8am-12pm','12pm-4pm','4pm-8pm'],default:'12pm-4pm',required:true},
+    examinationPrice:{type:Number,required:true,min:0},
 },{timestamps:true});
 
 doctorSchema.pre("save",async function(){
