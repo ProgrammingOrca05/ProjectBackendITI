@@ -16,7 +16,7 @@ const patientSchema = new mongoose.Schema(
     },
     password: { type: String, required: true, minlength: 6 },
     age: { type: Number, min: 0 },
-    gender: { type: String, enum: ['Male', 'Female', 'Other'] },
+    gender: { type: String, enum: ['male', 'female', 'other'] },
   },
   { timestamps: true }
 );
