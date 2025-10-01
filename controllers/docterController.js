@@ -9,7 +9,7 @@ const getDoctorDetails=async(req,res)=>
 {
     try{
         const doctorId=req.params.id;//نجيب ال id من ال url
-        const doctor=await doctorModel.findById(doctorId).select("name specialization about workHrs email");//بجيب الدكتور بال id
+    const doctor=await doctorModel.findById(doctorId).select("name specialization about workHrs examinationPrice email");//بجيب الدكتور بال id
         if(!doctor)
         {
             return res.status(404).json({
@@ -40,7 +40,7 @@ const getDoctorDetails=async(req,res)=>
 const getAllDoctors=async(req,res)=>
 {
     try{
-        const doctors=await doctorModel.find().select("name specialization about workHrs email");//بجيب جميع الأطباء مع تحديد الحقول المطلوبة فقط   
+    const doctors=await doctorModel.find().select("name specialization about workHrs examinationPrice email");//بجيب جميع الأطباء مع تحديد الحقول المطلوبة فقط   
         if(doctors.length===0)
         {
             res.status(404).json({
@@ -72,7 +72,7 @@ const updateDoctorDetails=async(req,res)=>{
 
     try{
         const doctorId=req.user.id;//بجيب ال id من ال token
-        const updatedDoctor=await doctorModel.findByIdAndUpdate(doctorId,req.body,{new:true,runValidators:true}).select("name specialization about workHrs email");//بجيب الدكتور بال id وبحدثه
+    const updatedDoctor=await doctorModel.findByIdAndUpdate(doctorId,req.body,{new:true,runValidators:true}).select("name specialization about workHrs examinationPrice email");//بجيب الدكتور بال id وبحدثه
         
         if(!updatedDoctor)
         {
