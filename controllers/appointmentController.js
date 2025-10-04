@@ -78,7 +78,7 @@ const getAppointmentById = async (req, res) => {
         const { id } = req.params;
         const wantedAppoinment=await appointment.findById(id)
         .populate('doctor', 'name specialization email examinationPrice') // populate doctor details
-        .populate('patient', 'name email gender phone'); // populate patient details
+        .populate('patient', 'name email gender'); // populate patient details
         if(!wantedAppoinment)
         {
             return res.status(404).json({
